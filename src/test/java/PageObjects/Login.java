@@ -1,0 +1,98 @@
+package PageObjects;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+
+import helpers.SeleniumFactory;
+import helpers.WebPageHelpers;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+
+public class Login {
+
+    WebDriver driver;
+
+
+
+    public Login() {
+        driver = SeleniumFactory.get();
+    }
+
+    public void openHomepage() {
+        if(driver.getCurrentUrl().equals("https://bg-test.www.ppgdes.com/")) {
+            System.out.println("This is the Homepage");
+        }else{
+        WebPageHelpers.openWebPage("homepage");
+        }
+    }
+
+    public String isNavTopElementPresent(String navItem){
+    	WebElement webElement = driver.findElement(By.cssSelector("img[alt=\"" + navItem + "\"]"));
+    	Actions ac = new Actions(driver);
+    	ac.moveToElement(webElement);
+    	
+    	try{
+    	Thread.sleep(2000);
+    	}
+    	catch(InterruptedException iex){
+    		iex.toString();
+    	}
+    	
+    	ac.perform();
+    	
+    	if(webElement != null){
+    		return webElement.getAttribute("alt");
+    	}
+    	else {
+    		return "NOT FOUND!";
+    	}
+    }
+    
+    /*
+    public Boolean isNewsDropDownItemPresent(String newsItem){
+    	WebElement webElement = driver.findElement(By.linkText(newsItem));
+    	
+    	return webElement != null;
+    }*/
+
+    public Boolean verifyNewsDropDownItems(String newsItem) throws Throwable{
+    	WebElement webElement = WebPageHelpers.FindElementByCss("img[alt=\"News Section\"]");
+    	
+    	Actions ac = new Actions (driver);
+    	ac.moveToElement(webElement);
+    	ac.perform();
+    	
+    	//WebPageHelpers.waitForElement("dropdown-content daily_informer");
+    	
+    	WebDriverWait wait = new WebDriverWait(driver, 10);
+    	
+    	WebElement element = wait.until(
+    	        ExpectedConditions.visibilityOfElementLocated(By.className("daily_informer")));
+
+    	
+    	try{
+    		WebElement dropDownElement = driver.findElement(By.linkText(newsItem));
+    		return dropDownElement.isDisplayed();
+    	}
+    	catch(NoSuchElementException ex){
+    		
+    		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE); // Can use BASE64 or BYTES as OutputType
+    	    FileUtils.copyFile(scrFile, new File("C:\\Users\\Tim O'Keeffe\\Documents\\0001 Sunday Times top level navigation I should see a sub links " + newsItem + ".jpg"));
+
+    		throw ex;
+    	}
+    	
+    }
+}
