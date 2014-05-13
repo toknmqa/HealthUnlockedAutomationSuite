@@ -50,7 +50,7 @@ public class Login {
     	Actions ac = new Actions(driver);
     	ac.click(webElement);
     	}    
-    
+ ///login page   
     public void loginPage() {
         if(driver.getCurrentUrl().equals("https://bg-test.www.ppgdes.com/login")) {
         	loginURL ="True";
