@@ -23,6 +23,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class Login {
 
     WebDriver driver;
+    public static String loginURL;
 
 
 
@@ -38,28 +39,26 @@ public class Login {
         }
     }
 
-    public String isNavTopElementPresent(String navItem){
-    	WebElement webElement = driver.findElement(By.cssSelector("img[alt=\"" + navItem + "\"]"));
+    public void loginButton(){
+    	WebElement webElement = driver.findElement(By.cssSelector("a[data-reactid='.0.1.0.0.0']"));
     	Actions ac = new Actions(driver);
-    	ac.moveToElement(webElement);
-    	
-    	try{
-    	Thread.sleep(2000);
-    	}
-    	catch(InterruptedException iex){
-    		iex.toString();
-    	}
-    	
-    	ac.perform();
-    	
-    	if(webElement != null){
-    		return webElement.getAttribute("alt");
-    	}
-    	else {
-    		return "NOT FOUND!";
-    	}
-    }
+    	ac.click(webElement);
+    	}    
     
+    public void loginPage() {
+        if(driver.getCurrentUrl().equals("https://bg-test.www.ppgdes.com/login")) {
+        	loginURL ="True";
+        	System.out.println("Log in Page");
+        }else{
+        	loginURL ="False";
+        }
+        try{
+        	Thread.sleep(2000);
+        	}
+        	catch(InterruptedException iex){
+        		iex.toString();
+        	}
+    }
     /*
     public Boolean isNewsDropDownItemPresent(String newsItem){
     	WebElement webElement = driver.findElement(By.linkText(newsItem));
