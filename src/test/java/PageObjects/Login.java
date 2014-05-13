@@ -37,6 +37,12 @@ public class Login {
         }else{
         WebPageHelpers.openWebPage("homepage");
         }
+        try{
+        	Thread.sleep(10000);
+        	}
+        	catch(InterruptedException iex){
+        		iex.toString();
+        	}
     }
 
     public void loginButton(){
