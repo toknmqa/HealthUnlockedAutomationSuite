@@ -19,8 +19,7 @@
         <!-- test properties -->
         <baseUrl>http://www.google.com</baseUrl>
         <browser>FIREFOX</browser>
-
-
+        
     </properties>
 
     <dependencies>

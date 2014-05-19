@@ -1,7 +1,1 @@
 helpers\SeleniumFactory$2.class
-PageObjects\Login.class
-helpers\SeleniumFactory$1.class
-helpers\SeleniumFactory.class
-helpers\WebPageHelpers.class
-helpers\SeleniumFactory$BrowserName.class
-steps\CreateAccountAndLoginPopupsDefs.class

@@ -1,14 +1,29 @@
 package helpers;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.List;
 
+import org.apache.tools.ant.taskdefs.Get;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import PageObjects.Community;
+import PageObjects.Login;
+
 public class WebPageHelpers {
+
+	private static WebDriver driver = SeleniumFactory.get();
+	String verifyLocation;
+	
+	public static WebDriver getDriver(){
+		
+		return driver;
+	}
 
 	public static void openWebPage(String url) {
 		// load page through selenium 2.0
@@ -22,36 +37,30 @@ public class WebPageHelpers {
 		// Maximise browser window
 	}
 
-	public static WebElement FindElementByCss(String CssLocator) {
+	// opens the Directory page
+	public void openDirectory() {
+
+		driver.findElement(By.cssSelector("a[data-reactid='.0.0.1.1']"))
+				.click();
+
+		WebElement directoryPage = driver.findElement(By
+				.cssSelector("h2[data-reactid='.0.2.1.0.0']"));
+		verifyLocation = directoryPage.getText();
+		assertTrue(verifyLocation.equals("Find and follow communities on the directory!"));
+
+	}
+
+	public void loginButton(String page) {
+		if (page.equals("Homepage")) {
+			driver.findElement(By.cssSelector("a[data-reactid='.0.0.1.0']"))
+					.click();
+		} else
+			driver.findElement(By.cssSelector("a[data-reactid='.0.1.0.0.0']"))
+					.click();
 		try {
-			return SeleniumFactory.get()
-					.findElement(By.cssSelector(CssLocator));
-		} catch (NoSuchElementException e) {
-			return null;
+			Thread.sleep(2000);
+		} catch (InterruptedException iex) {
+			iex.toString();
 		}
 	}
-
-	public static List<WebElement> FindElementsByCss(String CssLocator) {
-		try {
-			return SeleniumFactory.get().findElements(
-					By.cssSelector(CssLocator));
-		} catch (NoSuchElementException e) {
-			return null;
-		}
-	}
-
-	public static boolean isElementPresentByCss(String CssLocator) {
-		if (!FindElementByCss(CssLocator).equals(null)) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	public static void waitForElement(String CssLocator) {
-		new WebDriverWait(SeleniumFactory.get(), 10, 50)
-				.until(ExpectedConditions.visibilityOfElementLocated(By
-						.cssSelector(CssLocator)));
-	}
-
 }
