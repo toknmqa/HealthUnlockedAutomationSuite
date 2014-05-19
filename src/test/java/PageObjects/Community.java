@@ -94,6 +94,7 @@ public class Community extends WebPageHelpers {
 	public void openCommunityPages(String page) {
 		if (page.equals("Posts_Questions")) {
 			openPostsQuestions();
+			System.out.println(page);
 		} else if (page.equals("Polls")) {
 			openPolls();
 		} else if (page.equals("Members")) {
