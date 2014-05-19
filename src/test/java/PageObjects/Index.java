@@ -1,9 +1,6 @@
 package PageObjects;
 
-import helpers.SeleniumFactory;
 import helpers.WebPageHelpers;
-
-import org.openqa.selenium.WebDriver;
 
 public class Index extends WebPageHelpers {
 	
