@@ -6,12 +6,10 @@ import java.util.List;
 import java.util.Random;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import helpers.SeleniumFactory;
 import helpers.WebPageHelpers;
 
 public class Community extends WebPageHelpers {
